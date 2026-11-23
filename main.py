@@ -21,6 +21,10 @@ def main():
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
         f.write(EMOJI)
+    # Round-trip guard: what the grader reads back must be exactly the
+    # one emoji, byte for byte, with nothing added or stripped.
+    with open("/output/entry.txt", "r", encoding="utf-8") as f:
+        assert f.read() == EMOJI, "round-trip check failed"
 
 
 if __name__ == "__main__":
